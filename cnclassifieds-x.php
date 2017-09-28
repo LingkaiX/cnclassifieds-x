@@ -20,7 +20,7 @@ function send_mail_to_business( $data ) {
   add_action( 'rest_api_init', function () {
 	register_rest_route( 'cnx/v1', '/mailtobusiness/(?P<id>\w+)', array(
 	  'methods' => 'GET',
-	  'callback' => 'my_awesome_func',
+	  'callback' => 'send_mail_to_business',
 	) );
   } );
 
