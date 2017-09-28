@@ -14,11 +14,11 @@ function send_mail_to_business( $data ) {
     //. "\r\n" . "CC: visiontimes.mel@gmail.com";
 	mail($to,$subject,$txt,$headers);
 
-	return  $data['id'].'fgsdgfsde';
+	return  $data['id'].'yooo';
   }
 
   add_action( 'rest_api_init', function () {
-	register_rest_route( 'cnx/v1', '/mailtobusiness/(?P<id>\w+)', array(
+	register_rest_route( 'cnx/v1', '/mailtobusiness/(?P<id>\d+)', array(
 	  'methods' => 'GET',
 	  'callback' => 'send_mail_to_business',
 	) );
