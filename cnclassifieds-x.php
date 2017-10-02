@@ -36,7 +36,7 @@ function send_mail_to_business( $request ) {
 		return new WP_Error( 'valid request', 'valid parameter(s)', array( 'status' => 404 ));
 	//check if business has a mail
 	$bid=(int)$request['id'];
-	if(get_post_status($bid))
+	if(!get_post_status($bid))
 		return new WP_Error( 'valid request', 'no post', array( 'status' => 404 ));
 	$bmail=get_post_meta($bid,'bmail',true);
 	if(!$bmail)
