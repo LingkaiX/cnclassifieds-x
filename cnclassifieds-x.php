@@ -31,6 +31,7 @@ function send_mail_to_business( $request ) {
 	$umail=$request['mail']?$request['mail']:'';
 	$uphone=$request['phone']?$request['phone']:'';
 	$uenquiry=$request['enquiry']?$request['enquiry']:'';
+	//return $uname.'+'.$umail.'+'.$uphone.'+'.$uenquiry.'+'.$request['id'];
 	//check recieved data
 	if(empty($uname)||empty($umail)||empty($uenquiry))
 		return new WP_Error( 'valid request', 'valid parameter(s)', array( 'status' => 404 ));
@@ -38,7 +39,7 @@ function send_mail_to_business( $request ) {
 	$bid=(int)$request['id'];
 	if(!get_post_status($bid))
 		return new WP_Error( 'valid request', 'no post', array( 'status' => 404 ));
-	$bmail=get_post_meta($bid,'bmail',true);
+	$bmail=get_post_meta($bid,'email-to-business',true);
 	if(!$bmail)
 		return new WP_Error( 'valid request', 'no mail', array( 'status' => 404 ));
 	//store into database
