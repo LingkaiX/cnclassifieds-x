@@ -6,7 +6,8 @@
  * Author: Simon Xu
  * License: GPL2
  */
-
+//include 'ex-post.php';
+include 'ex-geo-admin.php';
 //create database table cnx-mail
 global $wpdb;
 $table_name = $wpdb->prefix . "cnx_mail"; 
