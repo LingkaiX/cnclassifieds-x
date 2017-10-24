@@ -1,6 +1,7 @@
 <?php
 //替代Geo My Wp插件，用于后台插入数据到wp_places_locator
 //没有创建表格的功能
+$wpdb->query("alter table wp_places_locator modify column phone varchar(255)");
 
 //Add meta to articles
 add_action( 'add_meta_boxes', 'cncinfo_ex_box' );
@@ -62,6 +63,7 @@ function add_cncinfo_ex_box($post) {
             return "";
         }
         jQuery(document).ready(function($){
+
             var input = (document.getElementById('cncinfo-address'));
             var autocomplete = new google.maps.places.Autocomplete(input,{componentRestrictions:{country: "AU"}});
             autocomplete.addListener('place_changed', function() {
@@ -89,7 +91,7 @@ function add_cncinfo_ex_box($post) {
 }
 add_action( 'save_post', 'save_cncinfo_ex_box',10, 2 );
 function save_cncinfo_ex_box($post_id, $post){
-
+    if ( wp_is_post_revision( $post_id ) ) return;
     // 安全检查
     // 检查是否发送了一次性隐藏表单内容（判断是否为第三者模拟提交）
     if ( ! isset( $_POST['cncinfo_ex_box_nonce'] ) ) {
@@ -161,21 +163,20 @@ function save_cncinfo_ex_box($post_id, $post){
     }
 }
 
-//
-// add_action("manage_articles_posts_custom_column",  "movie_custom_columns",10,2);
-// //manage_${post_type}_posts_columns filter
-// add_filter("manage_articles_posts_columns", "movie_edit_columns");
-// function movie_custom_columns($column,$post_id){
-//     switch ($column) {
-//         case "movie_director":
-//             echo get_post_meta( $post_id, '_movie_director', true );
-//             break;
-//     }
-// }
-// function movie_edit_columns($columns){
-
-//     //$columns['movie_director'] = '导演';
-
-//     return array_merge($columns,array('movie_director'=>'导演！'));
-// }
-
+//Add '定位' column to post list
+add_filter("manage_posts_columns", "add_cnc_location_column");
+function add_cnc_location_column($columns){
+    return array_merge($columns,array('cnc_location'=>'定位'));
+}
+add_action("manage_posts_custom_column",  "display_cnc_location_column",10,2);
+function display_cnc_location_column($column,$post_id){
+    global $wpdb;
+    $mypost = $wpdb->get_row( "SELECT * FROM wp_places_locator where post_id=".$post_id );
+    switch ($column) {
+        case "cnc_location":
+            if($mypost==null||$mypost->lat=="0.000000"||$mypost->long=="0.000000")
+                echo '<span style="color:red">no</spam>';
+            else echo '<span style="color:green">yes</spam>';
+            break;
+    }
+}

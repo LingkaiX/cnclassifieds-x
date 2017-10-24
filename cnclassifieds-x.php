@@ -25,7 +25,6 @@ $sql = "CREATE TABLE $table_name (
 require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 dbDelta( $sql );
 
-$wpdb->query("alter table wp_places_locator modify column phone varchar(255)");
  //api: send mail to business
 function send_mail_to_business( $request ) {
 	$uname=$request['name']?$request['name']:'';
