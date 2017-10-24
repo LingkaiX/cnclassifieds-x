@@ -24,10 +24,10 @@ function add_cncinfo_ex_box($post) {
     $mypost = $wpdb->get_row( "SELECT * FROM wp_places_locator where post_id=".$post->ID );
         ?>
     
-        <input type="text" id="cncinfo-address" name="cncinfo-address" value="<?php echo $mypost==null?'':$mypost->address ?>" placeholder="商家地址" style="width:100%;" autocomplete="off">
-        <input type="text" id="cncinfo-phone" name="cncinfo-phone" value="<?php echo $mypost==null?'':$mypost->phone ?>" placeholder="电话/手机" style="width:100%;">
-        <input type="text" id="cncinfo-email" name="cncinfo-email" value="<?php echo $mypost==null?'':$mypost->email ?>" placeholder="邮箱" style="width:100%;">
-        <input type="text" id="cncinfo-website" name="cncinfo-website" value="<?php echo $mypost==null?'':$mypost->website ?>" placeholder="网站" style="width:100%;">
+        <input type="text" id="cncinfo-address" name="cncinfo-address" value="<?php echo $mypost==null?'':$mypost->address ?>" placeholder="商家地址（必须选择一个下面列出的地址）" style="width:100%;" autocomplete="off">
+        <input type="text" id="cncinfo-phone" name="cncinfo-phone" value="<?php echo $mypost==null?'':$mypost->phone ?>" placeholder="电话/手机（最多255个字符）" style="width:100%;">
+        <input type="text" id="cncinfo-email" name="cncinfo-email" value="<?php echo $mypost==null?'':$mypost->email ?>" placeholder="邮箱（最多255个字符）" style="width:100%;">
+        <input type="text" id="cncinfo-website" name="cncinfo-website" value="<?php echo $mypost==null?'':$mypost->website ?>" placeholder="网站（只能填一个网址，网址必须以'http://' 或 'https://' 或 '//'开头）" style="width:100%;">
         <input type="hidden" id="cncinfo-lat" name="cncinfo-lat" value="<?php echo $mypost==null?'':$mypost->lat ?>">
         <input type="hidden" id="cncinfo-long" name="cncinfo-long" value="<?php echo $mypost==null?'':$mypost->long ?>">
         <input type="hidden" id="cncinfo-formatted_address" name="cncinfo-formatted_address" value="<?php echo $mypost==null?'':$mypost->formatted_address ?>">
