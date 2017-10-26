@@ -1,6 +1,7 @@
 <?php
 //替代Geo My Wp插件，用于后台插入数据到wp_places_locator
 //没有创建表格的功能
+global $wpdb;
 $wpdb->query("alter table wp_places_locator modify column phone varchar(255)");
 
 //Add meta to articles
