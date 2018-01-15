@@ -6,9 +6,7 @@
  * Author: Simon Xu
  * License: GPL2
  */
-//include 'ex-post.php';
-include 'ex-geo-admin.php';
-//create database table cnx-mail
+//create database table cnx-mail;
 global $wpdb;
 $table_name = $wpdb->prefix . "cnx_mail"; 
 $charset_collate = $wpdb->get_charset_collate();
@@ -77,3 +75,9 @@ function send_mail_to_business( $request ) {
 	) );
   } );
 
+
+
+//include 'ex-post.php';
+include 'ex-geo-admin.php';
+//include 'ex-cn-convert.php';
+include 'x-tab.php';
