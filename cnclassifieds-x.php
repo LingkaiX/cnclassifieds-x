@@ -77,7 +77,7 @@ function send_mail_to_business( $request ) {
 
 
 
-//include 'ex-post.php';
+include 'ex-post.php';
 include 'ex-geo-admin.php';
 //include 'ex-cn-convert.php';
 include 'x-tab.php';
