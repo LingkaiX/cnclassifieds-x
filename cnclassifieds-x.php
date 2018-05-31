@@ -60,7 +60,7 @@ function send_mail_to_business( $request ) {
 	$txt = "姓名：".$uname."\r\n邮箱：".$umail."\r\n";
 	if($uphone) $txt=$txt."联系电话：".$uphone."\r\n";
 	$txt=$txt."内容：".$uenquiry."\r\n";
-	$txt=$txt."\r\n请勿回复此邮件";
+	$txt=$txt."\r\n请勿直接回复此邮件！您可以通过上面用户提供的邮箱地址或电话号码与客户直接取得联系。";
 	$headers = "From: service@auads.com.au";
   //. "\r\n" . "CC: visiontimes.mel@gmail.com";
 	$result=mail($to,$subject,$txt,$headers);
