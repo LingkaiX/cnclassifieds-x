@@ -176,8 +176,8 @@ function display_cnc_location_column($column,$post_id){
     switch ($column) {
         case "cnc_location":
             if($mypost==null||$mypost->lat=="0.000000"||$mypost->long=="0.000000")
-                echo '<span style="color:red">no</spam>';
-            else echo '<span style="color:green">yes</spam>';
+                echo '<span style="color:red">no</span>';
+            else echo '<span style="color:green">yes</span>';
             break;
     }
 }
