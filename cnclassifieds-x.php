@@ -24,6 +24,18 @@ require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 dbDelta( $sql );
 
  //api: send mail to business
+function isSpam($content){
+	$array = array("viagra", "tadalafil", "cialis");
+	$isSpam=false;
+	foreach ($array as $key => $value) {
+		if(strpos($content, $value)===false){
+			//do nothing
+		}else{
+			$isSpam=true;
+		}
+	}
+	return $isSpam;
+}
 function send_mail_to_business( $request ) {
 	$uname=$request['name']?$request['name']:'';
 	$umail=$request['mail']?$request['mail']:'';
@@ -33,6 +45,24 @@ function send_mail_to_business( $request ) {
 	//check recieved data
 	if(empty($uname)||empty($umail)||empty($uenquiry))
 		return new WP_Error( 'valid request', 'valid parameter(s)', array( 'status' => 404 ));
+	//check spam
+	$isSpam=isSpam($uenquiry);
+	if($isSpam){
+		global $wpdb;
+		$table_name = $wpdb->prefix . "cnx_mail"; 
+		$wpdb->insert( 
+			$table_name, 
+			array( 
+				'sendtime' => current_time( 'mysql' ), 
+				'name' => $uname, 
+				'mail' => $umail.' ===SPAM', 
+				'phone' => $uphone,
+				'enquiry' => $uenquiry,
+				'sendto' => $bid,
+			) 
+		 );	
+		return new WP_Error( 'valid request', 'no post', array( 'status' => 404 ));
+	}
 	//check if business has a mail
 	$bid=(int)$request['id'];
 	if(!get_post_status($bid))
