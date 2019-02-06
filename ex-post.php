@@ -28,10 +28,11 @@ function my_custom_post_auart() {
     'description'   => '生活网热门文章',
     'public'        => true,
     'menu_position' => 5,
-    'supports'      => array( 'title',  'author', 'thumbnail', 'custom-fields' ),
-    'menu_icon'     => 'dashicons-money',
-    'has_archive'   => false
+    'supports'      => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'custom-fields' ),
+    'menu_icon'     => 'dashicons-format-aside',
+    'has_archive'   => false,
+    'cptp_permalink_structure' => '%post_id%'
   );
-  register_post_type( 'auart', $args );
+  register_post_type( 'auart', $args);
 }
 add_action( 'init', 'my_custom_post_auart' );
