@@ -2,7 +2,7 @@
 /**
  * Plugin Name: cnclassifieds-x
  * Description: Used with cnclassifieds theme
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Simon Xu
  * License: GPL2
  */
